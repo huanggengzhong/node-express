@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var bodyParser = require('body-parser')
 
 var app = express();
 
@@ -18,6 +19,11 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// post请求
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
